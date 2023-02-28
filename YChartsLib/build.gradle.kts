@@ -78,16 +78,16 @@ val javadocJar = tasks.register<Jar>("javadocJar") {
     from(dokkaOutputDir)
 }
 publishing {
-    repositories {
-        maven {
-            name = "YCharts"
-            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
-            credentials {
-                username = project.findProperty("mavenCentralUsername")?.toString() ?: System.getenv("MAVEN_USERNAME")
-                password = project.findProperty("mavenCentralPassword")?.toString() ?: System.getenv("MAVEN_PASSWORD")
-            }
-        }
-    }
+//    repositories {
+//        maven {
+//            name = "YCharts"
+//            setUrl("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
+//            credentials {
+//                username = project.findProperty("mavenCentralUsername")?.toString() ?: System.getenv("MAVEN_USERNAME")
+//                password = project.findProperty("mavenCentralPassword")?.toString() ?: System.getenv("MAVEN_PASSWORD")
+//            }
+//        }
+//    }
     publications {
         register<MavenPublication>("release") {
             groupId = "co.yml"
@@ -136,11 +136,11 @@ publishing {
 }
 
 
-signing {
-    useInMemoryPgpKeys(
-        project.findProperty("signingKeyId")?.toString() ?: System.getenv("SIGNINGKEY"),
-        project.findProperty("signing.InMemoryKey")?.toString() ?: System.getenv("MEMORY_KEY"),
-        project.findProperty("signing.password")?.toString()?:System.getenv("SIGNINGPASSWORD")
-    )
-    sign(publishing.publications)
-}
+//signing {
+//    useInMemoryPgpKeys(
+//        project.findProperty("signing.keyId")?.toString() ?: System.getenv("SIGNINGKEY"),
+//        project.findProperty("signing.InMemoryKey")?.toString() ?: System.getenv("MEMORY_KEY"),
+//        project.findProperty("signing.password")?.toString()?:System.getenv("SIGNINGPASSWORD")
+//    )
+//    sign(publishing.publications)
+//}
