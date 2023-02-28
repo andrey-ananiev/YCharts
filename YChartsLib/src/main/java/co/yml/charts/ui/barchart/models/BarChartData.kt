@@ -55,5 +55,6 @@ data class BarStyle(
     val isGradientEnabled: Boolean = false,
     val barBlendMode: BlendMode = DrawScope.DefaultBlendMode,
     val barDrawStyle: DrawStyle = Fill,
-    val selectionHighlightData: SelectionHighlightData? = SelectionHighlightData()
+    val selectionHighlightData: SelectionHighlightData? = SelectionHighlightData(),
+    val squeezeCoefficient: Float = 0F
 )

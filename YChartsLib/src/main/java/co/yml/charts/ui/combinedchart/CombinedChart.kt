@@ -282,6 +282,7 @@ fun CombinedChart(modifier: Modifier, combinedChartData: CombinedChartData) {
                                 plotData.groupBarList.forEachIndexed { index, groupBarData ->
                                     var insideOffset = 0f
                                     groupBarData.barList.forEachIndexed { subIndex, individualBar ->
+                                        val squeezeOffset = plotData.barStyle.barWidth.toPx() * subIndex * plotData.barStyle.squeezeCoefficient
                                         val drawOffset = getGroupBarDrawOffset(
                                             index, individualBar.point.y, xOffset, xLeft,
                                             scrollOffset, yBottom, yOffset, 0f
@@ -289,7 +290,7 @@ fun CombinedChart(modifier: Modifier, combinedChartData: CombinedChartData) {
                                         val height = yBottom - drawOffset.y
 
                                         val individualOffset =
-                                            Offset(drawOffset.x + insideOffset, drawOffset.y)
+                                            Offset(drawOffset.x + insideOffset - squeezeOffset, drawOffset.y)
 
                                         // drawing each individual bars
                                         drawGroupBarGraph(

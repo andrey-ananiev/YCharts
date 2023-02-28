@@ -13,7 +13,7 @@ import co.yml.charts.common.model.PlotType
 data class BarPlotData(
     override val plotType: PlotType = PlotType.Bar,
     val groupBarList: List<GroupBar>,
-    val groupingSize: Int = groupBarList.firstOrNull()?.barList?.size ?: 1,
+    val groupingSize: Float = (groupBarList.firstOrNull()?.barList?.size ?: 1).toFloat(),
     val barColorPaletteList: List<Color> = listOf(),
     val barStyle: BarStyle = BarStyle(),
 ) : PlotData {

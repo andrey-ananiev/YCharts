@@ -153,7 +153,7 @@ object DataUtils {
         for (index in 0 until listSize) {
             val barList = mutableListOf<BarData>()
             for (i in 0 until barSize) {
-                val barValue = "%.2f".format(Random.nextDouble(1.0, maxRange.toDouble())).toFloat()
+                val barValue = "%.2f".format(Random.nextDouble(1.0, maxRange.toDouble())).replace(',','.').toFloat()
                 barList.add(
                     BarData(
                         Point(

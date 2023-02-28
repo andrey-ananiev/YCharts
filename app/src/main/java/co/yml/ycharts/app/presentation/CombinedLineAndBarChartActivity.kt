@@ -110,8 +110,12 @@ fun BarWithLineChart() {
     )
     val barPlotData = BarPlotData(
         groupBarList = groupBarData,
-        barStyle = BarStyle(barWidth = 35.dp),
-        barColorPaletteList = colorPaletteList
+        barStyle = BarStyle(
+            barWidth = 35.dp,
+            squeezeCoefficient = 0.2F,
+        ),
+        barColorPaletteList = colorPaletteList,
+        groupingSize = 2.5F
     )
     val combinedChartData = CombinedChartData(
         combinedPlotDataList = listOf(barPlotData, linePlotData),
