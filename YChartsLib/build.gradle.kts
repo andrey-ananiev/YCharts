@@ -31,7 +31,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs = freeCompilerArgs + "-Xjvm-default=all"
+        freeCompilerArgs = freeCompilerArgs + "-Xjvm-default=all" + "-Xopt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose = true
@@ -138,7 +138,7 @@ publishing {
 
 signing {
     useInMemoryPgpKeys(
-        project.findProperty("signing.keyId")?.toString() ?: System.getenv("SIGNINGKEY"),
+        project.findProperty("signingKeyId")?.toString() ?: System.getenv("SIGNINGKEY"),
         project.findProperty("signing.InMemoryKey")?.toString() ?: System.getenv("MEMORY_KEY"),
         project.findProperty("signing.password")?.toString()?:System.getenv("SIGNINGPASSWORD")
     )
