@@ -9,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import co.yml.charts.common.model.LegendLabel
@@ -50,14 +51,16 @@ private fun Legend(config: LegendsConfig, legendLabel: LegendLabel) {
     ) {
         Box(
             modifier = Modifier
-                .background(legendLabel.color)
+                .clip(config.colorBoxShape)
                 .size(config.colorBoxSize)
+                .background(legendLabel.color)
         )
         Spacer(modifier = Modifier.padding(config.spaceBWLabelAndColorBox))
         Text(
             text = legendLabel.name,
             style = config.textStyle,
-            overflow = TextOverflow.Ellipsis
+            overflow = TextOverflow.Ellipsis,
+            color = config.textColor
         )
     }
 }

@@ -1,7 +1,10 @@
 package co.yml.charts.common.model
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -22,7 +25,9 @@ data class LegendsConfig(
     val gridPaddingHorizontal: Dp = 8.dp,
     val gridPaddingVertical: Dp = 8.dp,
     val colorBoxSize: Dp = 25.dp,
+    val colorBoxShape: Shape = CircleShape,
     val textStyle: TextStyle = TextStyle(),
+    val textColor: Color = Color.Black,
     val spaceBWLabelAndColorBox: Dp = 8.dp,
     val legendsArrangement: Arrangement.Horizontal = Arrangement.Center
 )

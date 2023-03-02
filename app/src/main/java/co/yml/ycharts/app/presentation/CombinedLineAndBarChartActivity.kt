@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,6 +32,7 @@ import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
 import co.yml.charts.common.components.Legends
 import co.yml.charts.common.model.LegendsConfig
 import co.yml.charts.common.utils.DataUtils
+import co.yml.charts.ui.barchart.models.SelectionHighlightData
 import co.yml.ycharts.app.R
 
 class CombinedLineAndBarChartActivity : ComponentActivity() {
@@ -106,13 +108,21 @@ fun BarWithLineChart() {
     val colorPaletteList = DataUtils.getColorPaletteList(3)
     val legendsConfig = LegendsConfig(
         legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
-        gridColumnCount = 3
+        gridColumnCount = 3,
+        textColor = MaterialTheme.colors.onSurface,
+        colorBoxShape = MaterialTheme.shapes.small
     )
     val barPlotData = BarPlotData(
         groupBarList = groupBarData,
         barStyle = BarStyle(
-            barWidth = 35.dp,
+            barWidth = 40.dp,
             squeezeCoefficient = 0.2F,
+            selectionHighlightData = SelectionHighlightData(
+                isHighlightBarRequired = true,
+                groupBarPopUpLabel = { _, y ->
+                    String.format("%.0f", y)
+                }
+            )
         ),
         barColorPaletteList = colorPaletteList,
         groupingSize = 2.5F

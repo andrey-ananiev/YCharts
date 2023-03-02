@@ -10,7 +10,7 @@ private val DarkColorPalette = darkColors(
     background = DarkGrey,
     primary = DarkGrey,
     text = DarkGrey,
-    button = Color.White
+    button = Color.White,
 )
 
 private val LightColorPalette = lightColors(
