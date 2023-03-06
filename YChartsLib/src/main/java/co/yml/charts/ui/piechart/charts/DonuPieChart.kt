@@ -169,10 +169,22 @@ fun DonutPieChart(
                         val fontSize = pieChartConfig.percentageFontSize.toPx()
                         drawText(
                             "${proportions[activePie].roundToInt()}%",
-                            (sideSize / 2) + fontSize / 4, (sideSize / 2) + fontSize / 3,
+                            (sideSize / 2) + fontSize / 4, (sideSize / 2) - fontSize / 3,
                             Paint().apply {
                                 color = pieChartConfig.percentColor.toArgb()
                                 textSize = fontSize
+                                textAlign = Paint.Align.CENTER
+                                typeface = pieChartConfig.percentageTypeface
+
+                            }
+                        )
+                        val labelFontSize = pieChartConfig.labelFontSize.toPx()
+                        drawText(
+                            pieChartData.slices[activePie].label,
+                            (sideSize / 2) + labelFontSize / 4, (sideSize / 2) + labelFontSize / 2,
+                            Paint().apply {
+                                color = pieChartConfig.percentColor.toArgb()
+                                textSize = labelFontSize
                                 textAlign = Paint.Align.CENTER
                                 typeface = pieChartConfig.percentageTypeface
 

@@ -47,6 +47,7 @@ data class PieChartConfig(
     @IntRange(from = 1) val animationDuration: Int = 500,
     val strokeWidth: Float = DEFAULT_STROKE_WIDTH,
     val percentageFontSize: TextUnit = 24.sp,
+    val labelFontSize: TextUnit = 24.sp,
     val percentageTypeface: Typeface = Typeface.DEFAULT,
     val percentVisible: Boolean = false,
     val percentColor: Color = Color.White,

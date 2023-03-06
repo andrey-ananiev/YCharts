@@ -108,7 +108,7 @@ fun BarWithLineChart() {
     val colorPaletteList = DataUtils.getColorPaletteList(3)
     val legendsConfig = LegendsConfig(
         legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
-        gridColumnCount = 3,
+        columnCount = 3,
         textColor = MaterialTheme.colors.onSurface,
         colorBoxShape = MaterialTheme.shapes.small
     )

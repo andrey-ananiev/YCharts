@@ -23,20 +23,28 @@ import co.yml.charts.common.model.LegendsConfig
 @Composable
 fun Legends(modifier: Modifier = Modifier, legendsConfig: LegendsConfig) {
     with(legendsConfig) {
-        if (legendLabelList.size > 1) {
-            LazyVerticalGrid(
+        if (legendLabelList.isNotEmpty()) {
+            Row(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(
-                        horizontal = gridPaddingHorizontal,
-                        vertical = gridPaddingVertical
+                        horizontal = paddingHorizontal,
+                        vertical = paddingVertical
                     ),
-                verticalArrangement = Arrangement.spacedBy(10.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-                columns = GridCells.Fixed(gridColumnCount)
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                items(legendLabelList) {
-                    Legend(legendsConfig, it)
+                val legendsInColumn = legendLabelList.size/columnCount
+                var index = 0
+                for (col in (0 until columnCount)) {
+                    Column(
+                        modifier = Modifier.weight((1.0/columnCount).toFloat()),
+                        verticalArrangement = Arrangement.spacedBy(10.dp)
+                    ) {
+                        for (i in (index..legendsInColumn * col)) {
+                            if (i < legendLabelList.size) Legend(legendsConfig, legendLabelList[i])
+                            index++
+                        }
+                    }
                 }
             }
         }

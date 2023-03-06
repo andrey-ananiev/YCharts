@@ -220,7 +220,7 @@ object DataUtils {
         }
         return LegendsConfig(
             legendLabelList = legendsList,
-            gridColumnCount = gridSize,
+            columnCount = gridSize,
             legendsArrangement = Arrangement.Start,
             textStyle = TextStyle()
         )

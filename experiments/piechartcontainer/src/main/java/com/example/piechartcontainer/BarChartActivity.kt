@@ -54,7 +54,7 @@ class BarChartActivity : ComponentActivity() {
                         .build()
                     val legendsConfig = LegendsConfig(
                         DataUtils.getLegendsLabelData(colorPaletteList),
-                        gridColumnCount = 3
+                        columnCount = 3
                     )
                     val groupBarChartData = GroupBarChartData(
                         barPlotData = groupBarPlotData,
