@@ -14,6 +14,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import co.yml.charts.common.model.LegendLabel
 import co.yml.charts.common.model.LegendsConfig
+import kotlin.math.roundToInt
 
 /**
  * Renders the list of legends in a grid format for given given grid column count
@@ -33,14 +34,15 @@ fun Legends(modifier: Modifier = Modifier, legendsConfig: LegendsConfig) {
                     ),
                 horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                val legendsInColumn = legendLabelList.size/columnCount
+                val legendsInColumn = legendLabelList.size/columnCount +
+                        if (legendLabelList.size % columnCount > 0) 1 else 0
                 var index = 0
-                for (col in (0 until columnCount)) {
+                for (col in (1..columnCount)) {
                     Column(
                         modifier = Modifier.weight((1.0/columnCount).toFloat()),
                         verticalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
-                        for (i in (index..legendsInColumn * col)) {
+                        for (i in (index until legendsInColumn * col)) {
                             if (i < legendLabelList.size) Legend(legendsConfig, legendLabelList[i])
                             index++
                         }
