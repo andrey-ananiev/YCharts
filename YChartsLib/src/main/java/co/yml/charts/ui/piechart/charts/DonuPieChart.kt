@@ -64,13 +64,15 @@ fun DonutPieChart(
 
     val progressSize = mutableListOf<Float>()
     progressSize.add(sweepAngles.first())
-
     for (x in 1 until sweepAngles.size) {
         progressSize.add(sweepAngles[x] + progressSize[x - 1])
     }
 
     var activePie by rememberSaveable {
         mutableStateOf(-1)
+    }
+    LaunchedEffect(key1 = proportions) {
+        activePie = -1
     }
     val accessibilitySheetState =
         rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
