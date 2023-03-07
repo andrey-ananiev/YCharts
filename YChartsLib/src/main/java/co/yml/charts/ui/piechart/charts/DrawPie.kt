@@ -26,6 +26,8 @@ fun DrawScope.drawPie(
     arcProgress: Float,
     size: Size,
     strokeWidth: Float = 100f,
+    activeAddWidth: Float = 20F,
+    sliceGap: Int = 0,
     padding: Float,
     isDonut: Boolean = false,
     isActive: Boolean = false,
@@ -34,12 +36,12 @@ fun DrawScope.drawPie(
     drawArc(
         color = color,
         startAngle = startAngle,
-        sweepAngle = arcProgress,
+        sweepAngle = arcProgress - sliceGap,
         useCenter = !isDonut,
         size = size,
         alpha = if (isActive) pieChartConfig.activeSliceAlpha else pieChartConfig.inActiveSliceAlpha,
         style = if (isDonut) Stroke(
-            width = if (isActive) (strokeWidth + 20f) else strokeWidth,
+            width = if (isActive) (strokeWidth + activeAddWidth) else strokeWidth,
         ) else Fill,
 
         topLeft = Offset(padding / 2, padding / 2)

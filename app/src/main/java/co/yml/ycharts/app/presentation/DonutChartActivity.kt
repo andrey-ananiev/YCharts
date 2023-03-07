@@ -80,7 +80,8 @@ private fun DonutChart1(context: Context) {
             percentageTypeface = Typeface.defaultFromStyle(Typeface.BOLD),
             isAnimationEnable = true,
             chartPadding = 25,
-            percentageFontSize = 42.sp
+            percentageFontSize = 42.sp,
+            sliceGap = 2
         )
     Column {
         Legends(legendsConfig = DataUtils.getLegendsConfigFromPieChartData(pieChartData = data, 3))

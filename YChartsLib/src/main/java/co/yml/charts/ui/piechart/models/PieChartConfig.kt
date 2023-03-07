@@ -46,6 +46,8 @@ data class PieChartConfig(
     val isAnimationEnable: Boolean = false,
     @IntRange(from = 1) val animationDuration: Int = 500,
     val strokeWidth: Float = DEFAULT_STROKE_WIDTH,
+    val activeAddWidth: Float = 20F,
+    val sliceGap: Int = 0,
     val percentageFontSize: TextUnit = 24.sp,
     val labelFontSize: TextUnit = 24.sp,
     val percentageTypeface: Typeface = Typeface.DEFAULT,

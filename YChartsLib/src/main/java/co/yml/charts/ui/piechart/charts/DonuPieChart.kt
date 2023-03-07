@@ -124,7 +124,7 @@ fun DonutPieChart(
                 modifier = Modifier
                     .width(sideSize.dp)
                     .height(sideSize.dp)
-                    .pointerInput(true) {
+                    .pointerInput(progressSize) {
 
                         detectTapGestures {
                             val clickedAngle = convertTouchEventPointToAngle(
@@ -158,6 +158,8 @@ fun DonutPieChart(
                         padding = padding,
                         isDonut = pieChartData.plotType == PlotType.Donut,
                         strokeWidth = pieChartConfig.strokeWidth,
+                        activeAddWidth = pieChartConfig.activeAddWidth,
+                        sliceGap = pieChartConfig.sliceGap,
                         isActive = activePie == index,
                         pieChartConfig = pieChartConfig
                     )
@@ -169,7 +171,7 @@ fun DonutPieChart(
                         val fontSize = pieChartConfig.percentageFontSize.toPx()
                         drawText(
                             "${proportions[activePie].roundToInt()}%",
-                            (sideSize / 2) + fontSize / 4, (sideSize / 2) - fontSize / 3,
+                            (sideSize / 2) + fontSize / 4, (sideSize / 2) - fontSize / 4,
                             Paint().apply {
                                 color = pieChartConfig.percentColor.toArgb()
                                 textSize = fontSize
@@ -181,7 +183,7 @@ fun DonutPieChart(
                         val labelFontSize = pieChartConfig.labelFontSize.toPx()
                         drawText(
                             pieChartData.slices[activePie].label,
-                            (sideSize / 2) + labelFontSize / 4, (sideSize / 2) + labelFontSize / 2,
+                            (sideSize / 2) + labelFontSize / 4, (sideSize / 2) + labelFontSize,
                             Paint().apply {
                                 color = pieChartConfig.percentColor.toArgb()
                                 textSize = labelFontSize
