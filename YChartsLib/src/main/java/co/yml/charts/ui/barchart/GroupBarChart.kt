@@ -100,9 +100,10 @@ fun GroupBarChart(modifier: Modifier, groupBarChartData: GroupBarChartData) {
                 .clickable {
                     if (isTalkBackEnabled) {
                         scope.launch {
-                            accessibilitySheetState.animateTo(
-                                ModalBottomSheetValue.Expanded
-                            )
+//                            accessibilitySheetState.animateTo(
+//                                ModalBottomSheetValue.Expanded
+//                            )
+                            accessibilitySheetState.show()
                         }
                     }
                 },

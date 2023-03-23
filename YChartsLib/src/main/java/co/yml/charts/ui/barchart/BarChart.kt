@@ -102,9 +102,10 @@ fun BarChart(modifier: Modifier, barChartData: BarChartData) {
                 .clickable {
                     if (isTalkBackEnabled) {
                         scope.launch {
-                            accessibilitySheetState.animateTo(
-                                ModalBottomSheetValue.Expanded
-                            )
+//                            accessibilitySheetState.animateTo(
+//                                ModalBottomSheetValue.Expanded
+//                            )
+                            accessibilitySheetState.show()
                         }
                     }
                 },

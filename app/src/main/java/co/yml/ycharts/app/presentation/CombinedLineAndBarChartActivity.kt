@@ -90,7 +90,7 @@ fun BarWithLineChart() {
     val linePlotData = LinePlotData(
         lines = listOf(
             Line(
-                DataUtils.getLineChartData(50, maxRange = 100),
+                DataUtils.getLineChartData(50, start = - 100, maxRange = 100),
                 lineStyle = LineStyle(color = Color.Blue),
                 intersectionPoint = IntersectionPoint(),
                 selectionHighlightPoint = SelectionHighlightPoint(),

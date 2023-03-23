@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
 
     defaultConfig {
         minSdk = 26
-        targetSdk = 32
+        targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,6 +44,7 @@ android {
             exclude("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
+    namespace = "co.yml.charts.components"
 }
 
 dependencies {
@@ -56,13 +57,28 @@ dependencies {
     implementation(co.ycharts.dependency.YChartDependency.COMPOSE_ACTIVITY)
     implementation(co.ycharts.dependency.YChartDependency.COMPOSE_MATERIAL)
     implementation(co.ycharts.dependency.YChartDependency.COMPOSE_TOOLING_PREVIEW)
+    //implementation(co.ycharts.dependency.YChartDependency.RUNTIME_LIVEDATA)
     testImplementation(co.ycharts.dependency.YChartDependency.JUNIT)
     testImplementation(co.ycharts.dependency.YChartDependency.MOCKK)
     androidTestImplementation(co.ycharts.dependency.YChartDependency.COMPOSE_JUNIT)
     debugImplementation(co.ycharts.dependency.YChartDependency.COMPOSE_UI_TEST_MANIFEST)
     androidTestImplementation(co.ycharts.dependency.YChartDependency.TEST_EXTN)
     androidTestImplementation(co.ycharts.dependency.YChartDependency.ESPRESSO_CORE)
+
+//    constraints {
+//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.10") {
+//            because("kotlin-stdlib-jdk7 is now a part of kotlin-stdlib")
+//        }
+//        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.20") {
+//            because("kotlin-stdlib-jdk8 is now a part of kotlin-stdlib")
+//        }
+//    }
 }
+
+configurations.implementation {
+    exclude("org.jetbrains.kotlin", "kotlin-stdlib-jdk8")
+}
+
 val dokkaOutputDir = "$buildDir/dokka"
 
 tasks.dokkaHtml {
