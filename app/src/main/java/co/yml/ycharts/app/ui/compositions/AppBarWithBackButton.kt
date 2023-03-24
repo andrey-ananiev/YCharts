@@ -1,13 +1,11 @@
 package co.yml.ycharts.app.ui.compositions
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -15,15 +13,18 @@ import androidx.compose.ui.unit.dp
 import co.yml.ycharts.app.R
 import co.yml.ycharts.app.ui.theme.YChartsTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
     TopAppBar(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp),
-        backgroundColor = YChartsTheme.colors.button,
-        elevation = 6.dp,
-        content = {
+            .height(60.dp)
+            .shadow(elevation = 6.dp),
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = YChartsTheme.colors.button,
+        ),
+        title = {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -55,6 +56,9 @@ fun AppBarWithBackButton(title: String, onBackPressed: () -> Unit) {
                     style = YChartsTheme.typography.header
                 )
             }
+        },
+        actions = {
+
         }
     )
 }

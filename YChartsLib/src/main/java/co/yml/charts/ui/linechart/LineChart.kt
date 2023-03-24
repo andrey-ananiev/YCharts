@@ -1,12 +1,8 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package co.yml.charts.ui.linechart
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,9 +32,6 @@ import co.yml.charts.ui.linechart.model.LineStyle
 import co.yml.charts.ui.linechart.model.LineType
 import co.yml.charts.ui.linechart.model.SelectionHighlightPoint
 import co.yml.charts.ui.linechart.model.SelectionHighlightPopUp
-import co.yml.charts.common.components.ItemDivider
-import co.yml.charts.common.components.accessibility.AccessibilityBottomSheetDialog
-import co.yml.charts.common.components.accessibility.LinePointInfo
 import co.yml.charts.common.extensions.RowClip
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.drawGridLines
@@ -55,25 +48,25 @@ import kotlinx.coroutines.launch
  */
 @Composable
 fun LineChart(modifier: Modifier, lineChartData: LineChartData) {
-    val accessibilitySheetState =
-        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+//    val accessibilitySheetState =
+//        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val isTalkBackEnabled by LocalContext.current.collectIsTalkbackEnabledAsState()
-    if (accessibilitySheetState.isVisible && isTalkBackEnabled
-        && lineChartData.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
-    ) {
-        BackHandler {
-            scope.launch {
-                accessibilitySheetState.hide()
-            }
-        }
-    }
+//    if (accessibilitySheetState.isVisible && isTalkBackEnabled
+//        && lineChartData.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
+//    ) {
+//        BackHandler {
+//            scope.launch {
+//                accessibilitySheetState.hide()
+//            }
+//        }
+//    }
     Surface(modifier = modifier) {
         with(lineChartData) {
             var columnWidth by remember { mutableStateOf(0f) }
             var rowHeight by remember { mutableStateOf(0f) }
             var xOffset by remember { mutableStateOf(0f) }
-            val bgColor = MaterialTheme.colors.surface
+            val bgColor = MaterialTheme.colorScheme.surface
             var isTapped by remember { mutableStateOf(false) }
             var tapOffset by remember { mutableStateOf(Offset(0f, 0f)) }
             var selectionTextVisibility by remember { mutableStateOf(false) }
@@ -100,7 +93,7 @@ fun LineChart(modifier: Modifier, lineChartData: LineChartData) {
 //                            accessibilitySheetState.animateTo(
 //                                ModalBottomSheetValue.Expanded
 //                            )
-                            accessibilitySheetState.show()
+                        //    accessibilitySheetState.show()
                         }
                     }
                 },
@@ -230,36 +223,36 @@ fun LineChart(modifier: Modifier, lineChartData: LineChartData) {
         }
         if (isTalkBackEnabled) {
             with(lineChartData) {
-                AccessibilityBottomSheetDialog(
-                    modifier = Modifier.fillMaxSize(),
-                    backgroundColor = Color.White,
-                    content = {
-                        val linePoints = linePlotData.lines.firstOrNull()?.dataPoints
-                        LazyColumn {
-                            items(linePoints?.size ?: 0) { index ->
-                                Column {
-                                    LinePointInfo(
-                                        xAxisData.axisLabelDescription(
-                                            xAxisData.labelData(
-                                                index
-                                            )
-                                        ),
-                                        linePoints?.get(index)?.description ?: "",
-                                        linePlotData.lines.firstOrNull()?.lineStyle?.color
-                                            ?: Color.Transparent
-                                    )
-                                    ItemDivider(
-                                        thickness = accessibilityConfig.dividerThickness,
-                                        dividerColor = accessibilityConfig.dividerColor
-                                    )
-                                }
-                            }
-                        }
-                    },
-                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
-                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
-                    sheetState = accessibilitySheetState
-                )
+//                AccessibilityBottomSheetDialog(
+//                    modifier = Modifier.fillMaxSize(),
+//                    backgroundColor = Color.White,
+//                    content = {
+//                        val linePoints = linePlotData.lines.firstOrNull()?.dataPoints
+//                        LazyColumn {
+//                            items(linePoints?.size ?: 0) { index ->
+//                                Column {
+//                                    LinePointInfo(
+//                                        xAxisData.axisLabelDescription(
+//                                            xAxisData.labelData(
+//                                                index
+//                                            )
+//                                        ),
+//                                        linePoints?.get(index)?.description ?: "",
+//                                        linePlotData.lines.firstOrNull()?.lineStyle?.color
+//                                            ?: Color.Transparent
+//                                    )
+//                                    ItemDivider(
+//                                        thickness = accessibilityConfig.dividerThickness,
+//                                        dividerColor = accessibilityConfig.dividerColor
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    },
+//                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
+//                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
+//                    sheetState = accessibilitySheetState
+//                )
             }
         }
     }

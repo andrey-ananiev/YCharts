@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package co.yml.ycharts.app.presentation
 
 import android.os.Bundle
@@ -7,9 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -42,7 +39,7 @@ class CombinedLineAndBarChartActivity : ComponentActivity() {
         setContent {
             YChartsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
-                    backgroundColor = YChartsTheme.colors.background,
+                    containerColor = YChartsTheme.colors.background,
                     topBar = {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_bar_with_line_chart),
@@ -109,7 +106,7 @@ fun BarWithLineChart() {
     val legendsConfig = LegendsConfig(
         legendLabelList = DataUtils.getLegendsLabelData(colorPaletteList),
         columnCount = 3,
-        textColor = MaterialTheme.colors.onSurface,
+        textColor = MaterialTheme.colorScheme.surface,
         colorBoxShape = MaterialTheme.shapes.small
     )
     val barPlotData = BarPlotData(

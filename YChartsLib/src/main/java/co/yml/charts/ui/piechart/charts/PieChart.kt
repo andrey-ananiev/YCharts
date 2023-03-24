@@ -1,27 +1,19 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package co.yml.charts.ui.piechart.charts
 
 import android.graphics.Paint
 import android.text.TextPaint
 import android.text.TextUtils
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.Surface
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
@@ -38,8 +30,6 @@ import co.yml.charts.ui.piechart.utils.convertTouchEventPointToAngle
 import co.yml.charts.ui.piechart.utils.getSliceCenterPoints
 import co.yml.charts.ui.piechart.utils.proportion
 import co.yml.charts.ui.piechart.utils.sweepAngles
-import co.yml.charts.common.components.accessibility.AccessibilityBottomSheetDialog
-import co.yml.charts.common.components.accessibility.SliceInfo
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.getTextHeight
 import co.yml.charts.common.model.PlotType
@@ -81,17 +71,17 @@ fun PieChart(
     var activePie by rememberSaveable {
         mutableStateOf(-1)
     }
-    val accessibilitySheetState =
-        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+//    val accessibilitySheetState =
+//        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val isTalkBackEnabled by LocalContext.current.collectIsTalkbackEnabledAsState()
-    if (accessibilitySheetState.isVisible && isTalkBackEnabled && pieChartConfig.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown) {
-        BackHandler {
-            scope.launch {
-                accessibilitySheetState.hide()
-            }
-        }
-    }
+//    if (accessibilitySheetState.isVisible && isTalkBackEnabled && pieChartConfig.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown) {
+//        BackHandler {
+//            scope.launch {
+//                accessibilitySheetState.hide()
+//            }
+//        }
+//    }
     Surface(
         modifier = modifier.fillMaxWidth()
     ) {
@@ -107,7 +97,7 @@ fun PieChart(
 //                            accessibilitySheetState.animateTo(
 //                                ModalBottomSheetValue.Expanded
 //                            )
-                            accessibilitySheetState.show()
+                           // accessibilitySheetState.show()
                         }
                     }
                 },
@@ -208,22 +198,22 @@ fun PieChart(
         }
         if (isTalkBackEnabled) {
             with(pieChartConfig) {
-                AccessibilityBottomSheetDialog(
-                    modifier = Modifier.fillMaxSize(),
-                    backgroundColor = Color.White,
-                    content = {
-                        LazyColumn {
-                            items(pieChartData.slices.size) { index ->
-                                SliceInfo(
-                                    pieChartData.slices[index], proportions[index].roundToInt()
-                                )
-                            }
-                        }
-                    },
-                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
-                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
-                    sheetState = accessibilitySheetState
-                )
+//                AccessibilityBottomSheetDialog(
+//                    modifier = Modifier.fillMaxSize(),
+//                    backgroundColor = Color.White,
+//                    content = {
+//                        LazyColumn {
+//                            items(pieChartData.slices.size) { index ->
+//                                SliceInfo(
+//                                    pieChartData.slices[index], proportions[index].roundToInt()
+//                                )
+//                            }
+//                        }
+//                    },
+//                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
+//                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
+//                    sheetState = accessibilitySheetState
+//                )
             }
         }
     }

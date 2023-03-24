@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -26,7 +25,6 @@ import co.yml.ycharts.app.R
 import co.yml.ycharts.app.ui.compositions.AppBarWithBackButton
 import co.yml.ycharts.app.ui.theme.YChartsTheme
 
-@OptIn(ExperimentalMaterialApi::class)
 class DonutChartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +32,7 @@ class DonutChartActivity : ComponentActivity() {
             YChartsTheme {
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    backgroundColor = YChartsTheme.colors.background,
+                    containerColor = YChartsTheme.colors.background,
                     topBar = {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_donut_chart),
@@ -58,11 +56,10 @@ class DonutChartActivity : ComponentActivity() {
     }
 }
 
-@ExperimentalMaterialApi
 @Composable
 private fun DonutChart1(context: Context) {
-    val accessibilitySheetState =
-        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+//    val accessibilitySheetState =
+//        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val data = DataUtils.getDonutChartData()
     // Sum of all the values

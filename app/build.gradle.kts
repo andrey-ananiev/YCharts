@@ -52,7 +52,7 @@ dependencies {
     implementation(project(mapOf("path" to ":YChartsLib")))
     implementation(co.ycharts.dependency.YChartDependency.CORE_KTX)
     implementation(co.ycharts.dependency.YChartDependency.COMPOSE_UI)
-    implementation(co.ycharts.dependency.YChartDependency.COMPOSE_MATERIAL)
+    implementation(co.ycharts.dependency.YChartDependency.MATERIAL_3)
     implementation(co.ycharts.dependency.YChartDependency.COMPOSE_TOOLING_PREVIEW)
     implementation(co.ycharts.dependency.YChartDependency.RUNTIME_KTX)
     //implementation(co.ycharts.dependency.YChartDependency.RUNTIME_LIVEDATA)

@@ -9,10 +9,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetValue
-import androidx.compose.material.Surface
-import androidx.compose.material.rememberModalBottomSheetState
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -30,7 +27,6 @@ import co.yml.charts.ui.piechart.models.PieChartData
 import co.yml.charts.ui.piechart.utils.convertTouchEventPointToAngle
 import co.yml.charts.ui.piechart.utils.proportion
 import co.yml.charts.ui.piechart.utils.sweepAngles
-import co.yml.charts.common.components.accessibility.AccessibilityBottomSheetDialog
 import co.yml.charts.common.components.accessibility.SliceInfo
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.model.PlotType
@@ -45,7 +41,6 @@ import kotlin.math.roundToInt
  * @param pieChartConfig: configuration for the pie chart
  * @param onSliceClick(pieChartData.Slice)->Unit: The event that captures the click
  */
-@ExperimentalMaterialApi
 @Composable
 fun DonutPieChart(
     modifier: Modifier,
@@ -74,19 +69,19 @@ fun DonutPieChart(
     LaunchedEffect(key1 = proportions) {
         activePie = -1
     }
-    val accessibilitySheetState =
-        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+//    val accessibilitySheetState =
+//        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val isTalkBackEnabled by LocalContext.current.collectIsTalkbackEnabledAsState()
-    if (accessibilitySheetState.isVisible && isTalkBackEnabled
-        && pieChartConfig.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
-    ) {
-        BackHandler {
-            scope.launch {
-                accessibilitySheetState.hide()
-            }
-        }
-    }
+//    if (accessibilitySheetState.isVisible && isTalkBackEnabled
+//        && pieChartConfig.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
+//    ) {
+//        BackHandler {
+//            scope.launch {
+//                accessibilitySheetState.hide()
+//            }
+//        }
+//    }
     Surface(
         modifier = modifier
     ) {
@@ -102,7 +97,7 @@ fun DonutPieChart(
 //                            accessibilitySheetState.animateTo(
 //                                ModalBottomSheetValue.Expanded
 //                            )
-                            accessibilitySheetState.show()
+                           // accessibilitySheetState.show()
                         }
                     }
                 }) {
@@ -200,23 +195,23 @@ fun DonutPieChart(
         }
         if (isTalkBackEnabled) {
             with(pieChartConfig) {
-                AccessibilityBottomSheetDialog(
-                    modifier = Modifier.fillMaxSize(),
-                    backgroundColor = Color.White,
-                    content = {
-                        LazyColumn {
-                            items(pieChartData.slices.size) { index ->
-                                SliceInfo(
-                                    pieChartData.slices[index],
-                                    proportions[index].roundToInt()
-                                )
-                            }
-                        }
-                    },
-                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
-                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
-                    sheetState = accessibilitySheetState
-                )
+//                AccessibilityBottomSheetDialog(
+//                    modifier = Modifier.fillMaxSize(),
+//                    backgroundColor = Color.White,
+//                    content = {
+//                        LazyColumn {
+//                            items(pieChartData.slices.size) { index ->
+//                                SliceInfo(
+//                                    pieChartData.slices[index],
+//                                    proportions[index].roundToInt()
+//                                )
+//                            }
+//                        }
+//                    },
+//                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
+//                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
+//                    sheetState = accessibilitySheetState
+//                )
             }
         }
     }

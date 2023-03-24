@@ -1,6 +1,5 @@
 package co.yml.charts.ui.piechart
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import co.yml.charts.common.model.PlotType
@@ -9,7 +8,6 @@ import co.yml.charts.ui.piechart.charts.PieChart
 import co.yml.charts.ui.piechart.models.PieChartConfig
 import co.yml.charts.ui.piechart.models.PieChartData
 
-@OptIn(ExperimentalMaterialApi::class)
 object ChartWrapper {
 
     /**

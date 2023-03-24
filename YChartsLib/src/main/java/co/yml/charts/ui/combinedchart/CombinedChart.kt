@@ -1,12 +1,8 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package co.yml.charts.ui.combinedchart
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,7 +27,6 @@ import co.yml.charts.ui.barchart.getMaxScrollDistance
 import co.yml.charts.ui.barchart.highlightGroupBar
 import co.yml.charts.ui.barchart.models.BarData
 import co.yml.charts.ui.barchart.models.BarPlotData
-import co.yml.charts.ui.barchart.models.GroupBar
 import co.yml.charts.ui.combinedchart.model.CombinedChartData
 import co.yml.charts.ui.linechart.drawHighLightOnSelectedPoint
 import co.yml.charts.ui.linechart.drawHighlightText
@@ -40,9 +35,6 @@ import co.yml.charts.ui.linechart.drawStraightOrCubicLine
 import co.yml.charts.ui.linechart.getCubicPoints
 import co.yml.charts.ui.linechart.getMappingPointsToGraph
 import co.yml.charts.ui.linechart.model.LinePlotData
-import co.yml.charts.common.components.ItemDivider
-import co.yml.charts.common.components.accessibility.AccessibilityBottomSheetDialog
-import co.yml.charts.common.components.accessibility.CombinedChartInfo
 import co.yml.charts.common.extensions.RowClip
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.getMaxElementInYAxis
@@ -61,22 +53,21 @@ import kotlinx.coroutines.launch
  * @param combinedChartData : All data needed to draw combined chart. [CombinedChartData] Data
  * class to save all params related to combined line and bar chart.
  */
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CombinedChart(modifier: Modifier, combinedChartData: CombinedChartData) {
-    val accessibilitySheetState =
-        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+//    val accessibilitySheetState =
+//        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val isTalkBackEnabled by LocalContext.current.collectIsTalkbackEnabledAsState()
-    if (accessibilitySheetState.isVisible && isTalkBackEnabled
-        && combinedChartData.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
-    ) {
-        BackHandler {
-            scope.launch {
-                accessibilitySheetState.hide()
-            }
-        }
-    }
+//    if (accessibilitySheetState.isVisible && isTalkBackEnabled
+//        && combinedChartData.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
+//    ) {
+//        BackHandler {
+//            scope.launch {
+//                accessibilitySheetState.hide()
+//            }
+//        }
+//    }
     Surface(modifier) {
         with(combinedChartData) {
             var xOffset by remember { mutableStateOf(0f) }
@@ -93,7 +84,7 @@ fun CombinedChart(modifier: Modifier, combinedChartData: CombinedChartData) {
             val linePoints: List<Point> =
                 linePlotData.lines.flatMap { line -> line.dataPoints.map { it } }
             val barPoints = barPlotData.groupBarList.flatMap { bar -> bar.barList.map { it } }
-            val bgColor = MaterialTheme.colors.surface
+            val bgColor = MaterialTheme.colorScheme.surface
             val xMin =
                 minOf(if(linePoints.isEmpty()) 0.0f else linePoints.minOf { it.x }, (barPlotData.groupBarList.size).toFloat())
             val xMax =
@@ -133,7 +124,7 @@ fun CombinedChart(modifier: Modifier, combinedChartData: CombinedChartData) {
 //                                accessibilitySheetState.animateTo(
 //                                    ModalBottomSheetValue.Expanded
 //                                )
-                                accessibilitySheetState.show()
+                                //accessibilitySheetState.show()
                             }
                         }
                     },
@@ -350,47 +341,47 @@ fun CombinedChart(modifier: Modifier, combinedChartData: CombinedChartData) {
                 }
             )
             if (isTalkBackEnabled) {
-                AccessibilityBottomSheetDialog(
-                    modifier = Modifier.fillMaxSize(), backgroundColor = Color.White, content = {
-                        LazyColumn {
-                            items(xMax.toInt()) { index ->
-                                Column {
-                                    val lineData: MutableList<Point> = mutableListOf()
-                                    val lineColors: MutableList<Color> = mutableListOf()
-                                    linePlotData.lines.forEachIndexed { _, line ->
-                                        lineColors.add(line.lineStyle.color)
-                                        line.dataPoints
-                                        line.dataPoints.forEachIndexed { pointIndex, point ->
-                                            if (pointIndex == index) {
-                                                lineData.add(point)
-                                            }
-                                        }
-                                    }
-                                    val groupBarData: GroupBar? =
-                                        barPlotData.groupBarList.filterIndexed { barIndex, _ -> barIndex == index }
-                                            .firstOrNull()
-                                    CombinedChartInfo(
-                                        pointsList = lineData,
-                                        lineColor = lineColors,
-                                        groupBar = groupBarData,
-                                        axisLabelDescription = xAxisData.axisLabelDescription(
-                                            xAxisData.labelData(index)
-                                        ),
-                                        barColorPaletteList = barPlotData.barColorPaletteList,
-                                        dividerColor = accessibilityConfig.dividerColor
-                                    )
-                                    ItemDivider(
-                                        thickness = accessibilityConfig.dividerThickness,
-                                        dividerColor = accessibilityConfig.dividerColor
-                                    )
-                                }
-                            }
-                        }
-                    },
-                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
-                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
-                    sheetState = accessibilitySheetState
-                )
+//                AccessibilityBottomSheetDialog(
+//                    modifier = Modifier.fillMaxSize(), backgroundColor = Color.White, content = {
+//                        LazyColumn {
+//                            items(xMax.toInt()) { index ->
+//                                Column {
+//                                    val lineData: MutableList<Point> = mutableListOf()
+//                                    val lineColors: MutableList<Color> = mutableListOf()
+//                                    linePlotData.lines.forEachIndexed { _, line ->
+//                                        lineColors.add(line.lineStyle.color)
+//                                        line.dataPoints
+//                                        line.dataPoints.forEachIndexed { pointIndex, point ->
+//                                            if (pointIndex == index) {
+//                                                lineData.add(point)
+//                                            }
+//                                        }
+//                                    }
+//                                    val groupBarData: GroupBar? =
+//                                        barPlotData.groupBarList.filterIndexed { barIndex, _ -> barIndex == index }
+//                                            .firstOrNull()
+//                                    CombinedChartInfo(
+//                                        pointsList = lineData,
+//                                        lineColor = lineColors,
+//                                        groupBar = groupBarData,
+//                                        axisLabelDescription = xAxisData.axisLabelDescription(
+//                                            xAxisData.labelData(index)
+//                                        ),
+//                                        barColorPaletteList = barPlotData.barColorPaletteList,
+//                                        dividerColor = accessibilityConfig.dividerColor
+//                                    )
+//                                    ItemDivider(
+//                                        thickness = accessibilityConfig.dividerThickness,
+//                                        dividerColor = accessibilityConfig.dividerColor
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    },
+//                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
+//                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
+//                    sheetState = accessibilitySheetState
+//                )
             }
         }
     }

@@ -3,7 +3,7 @@ package co.ycharts.dependency
 object Version {
     const val CORE_KTX = "1.8.0"
     const val APPCOMPAT = "1.4.2"
-    const val MATERIAL = "1.6.1"
+    const val MATERIAL = "1.8.0"
     const val MATERIAL_3 = "1.1.0-beta01"
     const val JUNIT = "4.13.2"
     const val TEST_EXTN = "1.1.3"

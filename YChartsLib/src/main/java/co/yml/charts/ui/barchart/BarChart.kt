@@ -1,11 +1,9 @@
 package co.yml.charts.ui.barchart
 
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,9 +28,6 @@ import co.yml.charts.ui.barchart.models.BarChartData
 import co.yml.charts.ui.barchart.models.BarData
 import co.yml.charts.ui.barchart.models.BarStyle
 import co.yml.charts.ui.barchart.models.SelectionHighlightData
-import co.yml.charts.common.components.ItemDivider
-import co.yml.charts.common.components.accessibility.AccessibilityBottomSheetDialog
-import co.yml.charts.common.components.accessibility.BarInfo
 import co.yml.charts.common.extensions.RowClip
 import co.yml.charts.common.extensions.collectIsTalkbackEnabledAsState
 import co.yml.charts.common.extensions.getMaxElementInYAxis
@@ -51,23 +46,22 @@ import kotlinx.coroutines.launch
  * @param barChartData : All data needed to Bar Chart
  * @see [BarChartData] Data class to save all params related to Bar Chart
  */
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun BarChart(modifier: Modifier, barChartData: BarChartData) {
-    val accessibilitySheetState =
-        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
+//    val accessibilitySheetState =
+//        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val isTalkBackEnabled by LocalContext.current.collectIsTalkbackEnabledAsState()
 
-    if (accessibilitySheetState.isVisible && isTalkBackEnabled
-        && barChartData.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
-    ) {
-        BackHandler {
-            scope.launch {
-                accessibilitySheetState.hide()
-            }
-        }
-    }
+//    if (accessibilitySheetState.isVisible && isTalkBackEnabled
+//        && barChartData.accessibilityConfig.shouldHandleBackWhenTalkBackPopUpShown
+//    ) {
+//        BackHandler {
+//            scope.launch {
+//                accessibilitySheetState.hide()
+//            }
+//        }
+//    }
     Surface(modifier) {
         with(barChartData) {
             var barHighlightVisibility by remember { mutableStateOf(false) }
@@ -80,7 +74,7 @@ fun BarChart(modifier: Modifier, barChartData: BarChartData) {
             var rowHeight by remember { mutableStateOf(0f) }
             val paddingRight = paddingEnd
             val points = chartData.map { it.point }
-            val bgColor = MaterialTheme.colors.surface
+            val bgColor = MaterialTheme.colorScheme.surface
 
             val (xMin, xMax) = getXMaxAndMinPoints(points)
             val (_, yMax) = getYMaxAndMinPoints(points)
@@ -105,7 +99,7 @@ fun BarChart(modifier: Modifier, barChartData: BarChartData) {
 //                            accessibilitySheetState.animateTo(
 //                                ModalBottomSheetValue.Expanded
 //                            )
-                            accessibilitySheetState.show()
+                          //  accessibilitySheetState.show()
                         }
                     }
                 },
@@ -212,34 +206,34 @@ fun BarChart(modifier: Modifier, barChartData: BarChartData) {
         }
         if (isTalkBackEnabled) {
             with(barChartData) {
-                AccessibilityBottomSheetDialog(
-                    modifier = Modifier.fillMaxSize(),
-                    backgroundColor = Color.White,
-                    content = {
-                        LazyColumn {
-                            items(chartData.size) { index ->
-                                Column {
-                                    BarInfo(
-                                        xAxisData.axisLabelDescription(
-                                            xAxisData.labelData(
-                                                index
-                                            )
-                                        ),
-                                        chartData[index].description,
-                                        chartData[index].color
-                                    )
-                                    ItemDivider(
-                                        thickness = accessibilityConfig.dividerThickness,
-                                        dividerColor = accessibilityConfig.dividerColor
-                                    )
-                                }
-                            }
-                        }
-                    },
-                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
-                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
-                    sheetState = accessibilitySheetState
-                )
+//                AccessibilityBottomSheetDialog(
+//                    modifier = Modifier.fillMaxSize(),
+//                    backgroundColor = Color.White,
+//                    content = {
+//                        LazyColumn {
+//                            items(chartData.size) { index ->
+//                                Column {
+//                                    BarInfo(
+//                                        xAxisData.axisLabelDescription(
+//                                            xAxisData.labelData(
+//                                                index
+//                                            )
+//                                        ),
+//                                        chartData[index].description,
+//                                        chartData[index].color
+//                                    )
+//                                    ItemDivider(
+//                                        thickness = accessibilityConfig.dividerThickness,
+//                                        dividerColor = accessibilityConfig.dividerColor
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    },
+//                    popUpTopRightButtonTitle = accessibilityConfig.popUpTopRightButtonTitle,
+//                    popUpTopRightButtonDescription = accessibilityConfig.popUpTopRightButtonDescription,
+//                    sheetState = accessibilitySheetState
+//                )
             }
         }
     }

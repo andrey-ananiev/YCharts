@@ -9,7 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Scaffold
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,7 +30,7 @@ class PieChartActivity : ComponentActivity() {
         setContent {
             YChartsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
-                    backgroundColor = YChartsTheme.colors.background,
+                    containerColor = YChartsTheme.colors.background,
                     topBar = {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_pie_chart),

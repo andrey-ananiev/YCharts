@@ -5,9 +5,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             YChartsTheme {
                 Scaffold(modifier = Modifier.fillMaxSize(),
-                    backgroundColor = YChartsTheme.colors.background,
+                    containerColor = YChartsTheme.colors.background,
                     topBar = { AppBar() })
                 {
                     Column(
@@ -92,13 +93,15 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun AppBar() {
     TopAppBar(
         modifier = Modifier
-            .fillMaxWidth(),
-        backgroundColor = YChartsTheme.colors.button,
-        elevation = 6.dp,
+            .fillMaxWidth().shadow(elevation = 6.dp),
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = YChartsTheme.colors.button,
+        ),
         title = {
             Text(
                 text = stringResource(R.string.app_name),
@@ -119,7 +122,7 @@ private fun ChartButton(title: String, onClick: () -> Unit) {
                 .padding(end = 10.dp, start = 10.dp)
                 .fillMaxWidth()
                 .height(50.dp), onClick = onClick,
-            colors = ButtonDefaults.buttonColors(backgroundColor = YChartsTheme.colors.button)
+            colors = ButtonDefaults.buttonColors(containerColor = YChartsTheme.colors.button)
         ) {
             Text(
                 text = title,
