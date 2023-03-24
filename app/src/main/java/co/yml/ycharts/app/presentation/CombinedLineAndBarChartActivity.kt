@@ -44,7 +44,7 @@ class CombinedLineAndBarChartActivity : ComponentActivity() {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_bar_with_line_chart),
                             onBackPressed = {
-                                onBackPressed()
+                                //onBackPressed()
                             })
                     })
                 {

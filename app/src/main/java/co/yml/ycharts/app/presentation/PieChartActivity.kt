@@ -35,7 +35,7 @@ class PieChartActivity : ComponentActivity() {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_pie_chart),
                             onBackPressed = {
-                                onBackPressed()
+                               // onBackPressed()
                             })
                     })
                 {

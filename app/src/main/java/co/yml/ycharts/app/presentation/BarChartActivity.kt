@@ -37,7 +37,7 @@ class BarChartActivity : ComponentActivity() {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_bar_chart),
                             onBackPressed = {
-                                onBackPressed()
+                               // onBackPressed()
                             })
                     })
                 {

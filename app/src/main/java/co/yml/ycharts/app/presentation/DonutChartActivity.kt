@@ -37,7 +37,7 @@ class DonutChartActivity : ComponentActivity() {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_donut_chart),
                             onBackPressed = {
-                                onBackPressed()
+                                //onBackPressed()
                             })
                     })
                 {
@@ -60,13 +60,13 @@ class DonutChartActivity : ComponentActivity() {
 private fun DonutChart1(context: Context) {
 //    val accessibilitySheetState =
 //        rememberModalBottomSheetState(initialValue = ModalBottomSheetValue.Hidden)
-    val scope = rememberCoroutineScope()
+   // val scope = rememberCoroutineScope()
     val data = DataUtils.getDonutChartData()
     // Sum of all the values
     val sumOfValues = data.totalLength
 
     // Calculate each proportion value
-    val proportions = data.slices.proportion(sumOfValues)
+  //  val proportions = data.slices.proportion(sumOfValues)
     val pieChartConfig =
         PieChartConfig(
             percentVisible = true,

@@ -49,7 +49,7 @@ class LineChartActivity : ComponentActivity() {
                         AppBarWithBackButton(
                             stringResource(id = R.string.title_line_chart),
                             onBackPressed = {
-                                onBackPressed()
+                               // onBackPressed()
                             })
                     })
                 {
